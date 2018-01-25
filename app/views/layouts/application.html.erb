@@ -33,6 +33,23 @@
             <li><%= link_to "Link2", "/path2"  %></li>
             <li><%= link_to "Link3", "/path3"  %></li>
           </ul>
+          <ul class="nav navbar-right col-md-4">
+            <% if current_user %>
+              <li class="col-md-8 user-name">
+                <%= link_to ('<i class="fa fa-user"></i> ' + truncate(current_user.email, length: 25)).html_safe,
+                                          edit_user_registration_path, title: "Edit profile" %>
+              </li>
+              <li class="col-md-1">&nbsp</li>
+              <li class="col-md-3 logout pull-right">
+                <%= link_to("Logout", destroy_user_session_path, class: "btn btn-xs btn-danger", method: :delete,
+                                          title: "Logout") %>
+              </li>
+            <% else %>
+              <li class="col-md-3 logout pull-right">
+                <%= link_to "Sign In", new_user_session_path, class: "btn btn-xs btn-primary", title: "Sign In" %>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
